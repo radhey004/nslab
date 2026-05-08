@@ -1,0 +1,62 @@
+def encrypt(text,key):
+    result=""
+    for ch in text:
+        if ch.isalpha():
+            if ch.isupper():
+                result+=chr((ord(ch)-ord('A')+key)%26+ord('A'))
+            else:
+                result+=chr((ord(ch)-ord('a')+key)%26+ord('a'))
+        else:
+            result+=ch
+    return result        
+                
+def decrypt(text,key):
+    result=""
+    for ch in text:
+        if ch.isalpha():
+            if ch.isupper():
+                result+=chr((ord(ch)-ord('A')-key)%26+ord('A'))
+            else:
+                result+=chr((ord(ch)-ord('a')-key)%26+ord('a'))
+        else:
+            result+=ch
+    return result      
+    
+text=input("Enter data:")
+key=int(input("Enter key:"))
+
+encrypted=encrypt(text,key)
+print("Encrypted:",encrypted)
+
+decrypted=decrypt(encrypted,key)
+print("Decrypted:",decrypted)
+
+
+Encryption
+Start
+Input text and key
+For each character in text:
+If it is a letter → shift it forward by key
+Else → keep it same
+Print encrypted text
+Stop
+
+Decryption
+Start
+Input encrypted text and key
+For each character in text:
+If it is a letter → shift it backward by key
+Else → keep it same
+Print decrypted text
+Stop
+
+FLOWCHART
+Start
+Input text, key
+Take one character
+Is it alphabet?
+Yes → Shift character
+No → Keep same
+Repeat for all characters
+Print result
+Stop
