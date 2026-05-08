@@ -1,0 +1,122 @@
+def get_order(key):
+    return sorted(range(len(key)),key=lambda k:key[k])
+    
+def encrypt(text,key):
+    col=len(key)
+    row=(len(text)+col-1)//col
+    
+    text+='x'*(row*col-len(text))
+    
+    mat=[]
+    for i in range(0,len(text),col):
+        mat.append(text[i:i+col])
+    
+    cipher=""
+    for c in get_order(key):
+        for r in range(row):
+            cipher+=mat[r][c]
+            
+    return cipher
+    
+def decrypt(text,key):
+    col=len(key)
+    row=len(text)//col
+    
+    mat=[[""for _ in range(col)]for _ in range(row)]
+    
+    k=0
+    for c in get_order(key):
+        for r in range(row):
+            mat[r][c]=text[k]
+            k+=1
+            
+    
+    result=""
+    for r in mat:
+        result+=''.join(r)
+    return result.rstrip('x') 
+    
+text=input("Enter message:")
+key=input("Enter key:")
+
+clean=text.replace(" ","").lower()
+
+encrypted=encrypt(clean,key)
+print("Encrypted:",encrypted)
+
+decrypted=decrypt(encrypted,key)
+print("Decrypted:",decrypted)
+
+        
+encryption flowchart
+Start
+   ↓
+Input Text & Key
+   ↓
+Remove spaces, convert to lowercase
+   ↓
+Find rows & columns
+   ↓
+Add 'x' padding if needed
+   ↓
+Create matrix (row-wise)
+   ↓
+Sort key → get column order
+   ↓
+Read matrix column-wise
+   ↓
+Generate Cipher Text
+   ↓
+Display Encrypted Text
+   ↓
+Stop
+
+
+decryprion flowchart
+Start
+   ↓
+Input Cipher Text & Key
+   ↓
+Find rows & columns
+   ↓
+Create empty matrix
+   ↓
+Sort key → get column order
+   ↓
+Fill matrix column-wise
+   ↓
+Read matrix row-wise
+   ↓
+Remove extra 'x'
+   ↓
+Display Original Text
+   ↓
+Stop
+
+Encryption Algorithm
+Start
+Input message (text) and key
+Remove spaces and convert text to lowercase
+Count number of columns = length of key
+Calculate number of rows needed
+Add extra 'x' characters if text is short (to fill matrix)
+Arrange text row-wise into a matrix
+Get column order by sorting key letters
+Read characters column-wise based on sorted key order
+Combine characters to form encrypted text
+Display encrypted text
+Stop
+
+
+Decryption Algorithm
+Start
+Input encrypted text and key
+Count number of columns = length of key
+Calculate number of rows
+Create empty matrix
+Get column order by sorting key
+Fill matrix column-wise using encrypted text
+Read matrix row-wise
+Remove extra 'x' characters
+Display decrypted text
+Stop
