@@ -66,3 +66,40 @@ int main() {
 
     return 0;
 }
+
+
+Algorithm
+Start
+Open file password.txt using fstream
+Read default password from file
+Display menu options
+Accept user choice
+Use switch-case:
+Case 1: Input password → compare with file password
+Case 2: Input password → display plain text
+Case 3: Input password → display masked (*)
+Case 4: Exit
+Stop
+
+
+
+ Start
+   ↓
+Open File (password.txt)
+   ↓
+Read Password
+   ↓
+Display Menu
+   ↓
+Enter Choice
+   ↓
+   Switch
+  /   |   |   \
+ C1  C2  C3  C4
+ ↓   ↓   ↓   ↓
+Check Show Show Exit
+Pwd  Plain Mask
+ ↓
+Access Granted / Denied
+   ↓
+ Stop
