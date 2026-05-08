@@ -1,0 +1,68 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    string filePassword, userPassword;
+    int choice;
+
+    // Read password from file
+    ifstream file("password.txt");
+    if(file.is_open()) {
+        getline(file, filePassword);
+        file.close();
+    } else {
+        cout << "Error opening file!" << endl;
+        return 1;
+    }
+
+    // Loop until user selects Exit
+    while(true) {
+
+        cout << "\n--- Password System ---\n";
+        cout << "1. Enter Password\n";
+        cout << "2. Show Plain Text Password\n";
+        cout << "3. Show Masked Password\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch(choice) {
+
+            case 1:
+                cout << "Enter Password: ";
+                cin >> userPassword;
+
+                if(userPassword == filePassword)
+                    cout << "Access Granted!\n";
+                else
+                    cout << "Access Denied!\n";
+                break;
+
+            case 2:
+                // Show stored password
+                cout << "Stored Password: " << filePassword << endl;
+                break;
+
+            case 3:
+                cout << "Enter Password: ";
+                cin >> userPassword;
+
+                cout << "Masked Password: ";
+                for(int i = 0; i < userPassword.length(); i++) {
+                    cout << "*";
+                }
+                cout << endl;
+                break;
+
+            case 4:
+                cout << "Exiting...\n";
+                return 0;  // exit program
+
+            default:
+                cout << "Invalid Choice!\n";
+        }
+    }
+
+    return 0;
+}
